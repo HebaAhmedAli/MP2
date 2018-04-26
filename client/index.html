@@ -1,12 +1,98 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en" >
+
 <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
+  <meta charset="UTF-8">
+  <title>Search Panel </title>
+  
+  
+  
+      <link rel="stylesheet" href="/stylesheets/style.css">
+
+  
 </head>
 
 <body>
-bla bla 
-</body>
-</body>
-</html>
+
+  <nav class="navigation">
+  <div class="container">
+   <span class="title">
+   <i class="fa fa-home"></i> Movies Data 
+  </span> 
+    <!-- <span class="search-control"  onclick="searchbox(1)">
+      Search <a style="font-family:fontawesome;"></a>
+    </span> -->
+</div>
+</nav>
+<div class="container">
+    <select name="category" class="search-box " id="category">
+        <option value="action">action</option>
+        <option value="comedy">comedy</option>
+        <option value="drama">Drama</option>
+        <option value="horror">Horror</option>
+    </select>
+
+    <div class="pop"></div>
+    <div class="search-box " >
+        <input id="filmMinRate" placeholder="filmMinRate..." type="text" required="true">
+    </div>
+
+        <div class="pop"></div>
+    <div class="search-box " id="SBox">
+       <input id="filmName" placeholder="filmName..." type="text">
+    </div>
+
+    <div class="pop"></div>
+    <button class="also search-box" onclick="searchbox()" id="searchclick"></button>
+
+   <div class="pop"></div>
+   <div>
+     <button type="button" onclick="AddRow()">Add Row!</button>  
+     <select name="AddCategory" class="search-box " id="AddCategory">
+            <option value="action">action</option>
+            <option value="comedy">comedy</option>
+            <option value="drama">Drama</option>
+            <option value="horror">Horror</option>
+        </select>
+    <input id="AddMovieName" placeholder=" Movie Name.." type="text" required="true">
     
+
+    <input id="AddRating" placeholder=" Rating.." type="text" required="true">
+    <input id="AddLanguage" placeholder=" Language..." type="text" required="true">
+    <input id="AddDirector" placeholder="Director..." type="text" required="true">
+    <input id="AddYear" placeholder="Year..." type="date" required="true">
+    <input id="AddAwards" placeholder="Awards..." type="text" required="true">
+
+   </div>
+    <div class="pop"></div>
+
+  <div>
+
+        <button type="button" onclick="DeleteRow()">Delete Row! </button>  
+        <select name="DeleteCategory" class="search-box " id="DeleteCategory">
+                <option value="action">action</option>
+                <option value="comedy">comedy</option>
+                <option value="drama">Drama</option>
+                <option value="horror">Horror</option>
+            </select>
+        <input id="DeleteMovieName" placeholder=" Movie Name.." type="text" required="true">
+        
+  </div>  
+    
+
+   </div>
+
+    
+</div>
+  
+  
+    <script src="/socket.io/socket.io.js"></script>
+    <script  src="/javascripts/index.js"></script>
+      
+
+
+
+</body>
+
+</html>
