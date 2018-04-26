@@ -40,8 +40,8 @@
            var rank=row.rank;
            var date=row.year;
 
-            var sql = "INSERT INTO "+table_name+" (film_name, category,rank,year) VALUES ("+mysql.escape(film_name)+
-            ","+mysql.escape(category)+","+mysql.escape(rank)+","+mysql.escape(date)+")";
+            var sql = "INSERT INTO "+table_name+" (film_name, category,rank,year,updated) VALUES ("+mysql.escape(film_name)+
+            ","+mysql.escape(category)+","+mysql.escape(rank)+","+mysql.escape(date)+", false)";
 
           if(server_no==1)
           {
@@ -87,7 +87,7 @@
         var table_name=parseInt(i/2);
         if(i!=1)
         {
-          con_s1.query("CREATE TABLE Table"+parseInt(i/2)+" (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE)", function (err, result1) {
+          con_s1.query("CREATE TABLE Table"+parseInt(i/2)+" (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,updated BOOLEAN)", function (err, result1) {
           if (err) throw err;
          console.log("Table created");
          });
@@ -100,7 +100,7 @@
       }
       else
       {
-        con_s2.query("CREATE TABLE Table0 (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE)", function (err, result2) {
+        con_s2.query("CREATE TABLE Table0 (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,updated BOOLEAN)", function (err, result2) {
           if (err) throw err;
          console.log("Table created");
          });
