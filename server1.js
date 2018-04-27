@@ -7,6 +7,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "", 
+  port: 3366,
   database: "movies"
 });
 
@@ -59,8 +60,9 @@ function findMovies (data){
     else { // if we are serching in the name of the movie 
 
       console.log("2na fl function d ya b4r");
-    var where =  ' WHERE Category = ? AND MovieName = ?' ;
+    var where =  ' WHERE Category = ? AND MovieName = ? AND updated <> -1' ;
     var select = 'SELECT * FROM '
+    var tablet = 'action'
 
     var sql = select + tablet + where;
 
@@ -95,11 +97,11 @@ function addMovie(data){
     var tablet = 'action';
     
     
-    var fields =  ' (MovieName, Category,Rating,Language,Directory,Year,Awards) VALUES ?' ;
+    var fields =  ' (MovieName, Category,Rating,Language,Directory,Year,Awards,updated) VALUES ?' ;
     var insert = 'INSERT INTO ';
 
     var values = [
-        [MovieName,Category,Rating,Language,Directory,Year,Awards]
+        [MovieName,Category,Rating,Language,Directory,Year,Awards,2] //2 means new row
     ];
 
     var sql = insert + tablet + fields;
@@ -121,15 +123,19 @@ function deleteMovie(data){
   var MovieName = data.movieName
   var Category = data.category;
 
+  var tablet = 'action';
 
-  var delete_q = 'SELECT * FROM '
+  var update = 'UPDATE '
 
-    var sql = select + tablet + where;
+  var set =  ' SET updated = -1' ;  // -1 means deleted
+  var where = ' WHERE Category = ? AND MovieName = ?'
+
+    var sql = update + tablet + set + where;
 
     console.log(sql);
       con.query(sql, [Category, MovieName], function (err, result) {
         if (err) throw err;
-        console.log(result);
+        console.log("Number of records deleted: " + result.affectedRows);
         });
 
 
