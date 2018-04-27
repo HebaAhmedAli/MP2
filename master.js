@@ -40,7 +40,7 @@
            var rank=row.rank;
            var date=row.year;
 
-            var sql = "INSERT INTO "+table_name+" (film_name, category,rank,year,updated) VALUES ("+mysql.escape(film_name)+
+            var sql = "INSERT INTO "+table_name+" (film_name, category,rank,year,status) VALUES ("+mysql.escape(film_name)+
             ","+mysql.escape(category)+","+mysql.escape(rank)+","+mysql.escape(date)+", false)";
 
           if(server_no==1)
@@ -87,7 +87,7 @@
         var table_name=parseInt(i/2);
         if(i!=1)
         {
-          con_s1.query("CREATE TABLE Table"+parseInt(i/2)+" (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,updated BOOLEAN)", function (err, result1) {
+          con_s1.query("CREATE TABLE Table"+parseInt(i/2)+" (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,status BOOLEAN)", function (err, result1) {
           if (err) throw err;
          console.log("Table created");
          });
@@ -100,7 +100,7 @@
       }
       else
       {
-        con_s2.query("CREATE TABLE Table0 (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,updated BOOLEAN)", function (err, result2) {
+        con_s2.query("CREATE TABLE Table0 (film_name VARCHAR(100) NOT NULL UNIQUE,  category VARCHAR(50),rank INT(11),year DATE,status BOOLEAN)", function (err, result2) {
           if (err) throw err;
          console.log("Table created");
          });
@@ -119,6 +119,7 @@
 
   }
 
+/*
   con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -134,12 +135,35 @@
 
       });
     });
+    */
+   
+   function till_client_server_no(data)
+   {
+    
+    var this_socket=this;
+    con.query("SELECT server_no FROM meta_data WHERE category= "+mysql.escape(data.category), function (err, result, fields) {
+    if (err) throw err;
+    
+    var row=JSON.parse(JSON.stringify(result[0]));
+    console.log(row.server_no);
+
+    var  server_no={
+      server_no:row.server_no
+    };
+    
+     this_socket.emit("server_no",server_no);
+
+
+     });
+
+    
+   }
     
   app.get('/',function(req, res) {
   	res.sendFile(__dirname + '/client/index.html');
   });
 
-  //app.use('/client',express.static(__dirname + '/client'));
+  app.use('/client',express.static(__dirname + '/client'));
 
   serv.listen(process.env.PORT || 3000);
   console.log("Master started.");
@@ -147,5 +171,15 @@
 
   io.sockets.on('connection', function(socket){
   	console.log("socket connected"); 
+    
+
+    socket.on("request_to_master",till_client_server_no);
+
+
 
   });
+
+  //-1 deleted
+  //1 updated
+  //2 added 
+  
