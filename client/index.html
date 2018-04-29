@@ -1,14 +1,132 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en" >
+
 <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
+    <meta charset="UTF-8">
+    <title>Search Panel </title>
+
+
+
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+
 </head>
 
 <body>
-bla bla 
+
+<nav class="navigation">
+    <div class="container">
+   <span class="title">
+   <i class=" home"></i> Movies Data
+  </span>
+        <!-- <span class="search-control"  onclick="searchbox(1)">
+          Search <a style="font-mily:fontawesome;"></a>
+        </span> -->
+    </div>
+</nav>
+<div class="container">
+    <select name="category" class="search-box " id="category">
+        <option value="Action">Action</option>
+        <option value="Animation">Animation</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+    </select>
+
+    <div class="pop"></div>
+    <div class="search-box " >
+        <input id="filmMinRate" placeholder="filmMinRate..." type="text" required="true">
+    </div>
+
+    <div class="pop"></div>
+    <div class="search-box " >
+        <input id="filmName" placeholder="filmName..." type="text">
+    </div>
+
+    <div class="pop"></div>
+    <button class="also search-box" onclick="searchbox()" id="searchclick"><span class="title">
+           <i class="home"></i> Search!</span></button>
+
+    <div class="pop"></div>
+    <div>
+
+        <select name="AddCategory" class="search-box " id="AddCategory">
+            <option value="Action">Action</option>
+        <option value="Animation">Animation</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        </select>
+
+        <input class="blocked" id="AddRating" placeholder=" Rating.." type="text" required="true">
+        <input class="blocked" id="AddMovieName" placeholder=" Movie Name.." type="text" required="true">
+        <input class="blocked" id="AddLanguage" placeholder=" Language..." type="text" required="true">
+        <!-- <input class="blocked" id="AddDirector" placeholder="Director..." type="text" required="true"> -->
+        <input class="blocked" id="AddYear" placeholder="Year..." type="date" required="true">
+        <!-- <input class="blocked" id="AddAwards" placeholder="Awards..." type="text" required="true"> -->
+
+        <button class="also search-box"  type="button" onclick="AddRow()"><span class="title">
+           <i class="home"></i> Add Row!</span></button>
+    </div>
+    <div class="pop"></div>
+
+    <div>
+
+        <select name="DeleteCategory" class="search-box " id="DeleteCategory">
+            <option value="Action">Action</option>
+        <option value="Animation">Animation</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        </select>
+        <input id="DeleteMovieName" placeholder=" Movie Name.." type="text" required="true">
+
+        <button class="also search-box"  type="button" onclick="DeleteRow()"><span class="title">
+          <i class="home"></i>Delete Row! </span></button>
+        <div class="pop"></div>
+    </div>
+
+
+    <h class="title"> <i class="home"></i>SET</h>
+
+    <div >
+        <input class="blocked" id="setMovieName" placeholder="Movie Name" type="text">
+        <input class="blocked" id="setCategory" placeholder="category" type="text">
+        <input class="blocked" id="setRating" placeholder="Rating" type="text">
+        <input class="blocked" id="setYear" placeholder="Year" type="text">
+        <input class="blocked" id="setLanguage" placeholder="Language" type="text">
+        <!-- <input class="blocked" id="setDirector" placeholder="Director" type="text"> -->
+
+        <div class="pop"></div>
+        <button class="also search-box" onclick="SetOnClick()" id="SetClick"><span class="title">
+
+        <i class="home"></i>SET</span></button>
+        <div class="pop"></div>
+
+        <div >
+            <input class="blocked" id="delMovieName" placeholder="Movie Name" type="text">
+            <input class="blocked" id="delCategory" placeholder="Category" type="text">
+            <div class="pop"></div>
+            <input type="checkbox" id= "delYear" name="gender" value="year"> Year<br>
+            <input type="checkbox" id= "delRatting" name="gender" value="rating"> Rating<br>
+            <input type="checkbox" id= "delLanguage" name="gender" value="language"> Language
+
+            <div class="pop"></div>
+            <button class="also search-box" onclick="DelOnClick()"><span class="title">
+        <i class="home"></i>Delete Cells</span></button>
+        <div class="pop"></div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script  src="javascripts/index.js"></script>
+
+
+
+
 </body>
-</body>
-<script src="/socket.io/socket.io.js"></script>
-	<script src="client/clientMain.js"></script>
+
 </html>
-    

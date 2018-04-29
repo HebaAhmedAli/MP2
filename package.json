@@ -1,16 +1,18 @@
 {
   "name": "mp2",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-   "start":"node app.js"
+    "start": "concurrently \"node server1.js\" \"node server2.js\" \"node master.js\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
     "mysql": "^2.15.0",
+    "mysql-client": "^0.3.0",
     "socket.io": "^2.1.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
